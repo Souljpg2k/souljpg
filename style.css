@@ -1,0 +1,231 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --bgb-color: #ffffff;
+    --logo-color: #222;
+    --ab-color: #222;
+    --link-color: #222;
+    --footer-color: #222;
+    --pf-color: #000000ce;
+    --s-color: #fff;
+    --g-color: #ffffff;
+    --tg-color: #222;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 30px;
+    width: auto;
+    margin: 0;
+    padding: 0.4rem;
+    padding-left: 4rem;
+    background-color: var(--bgb-color);
+}
+
+.logo h1 {
+    user-select: none;
+    font-size: 18px;
+    color: var(--logo-color);
+}
+
+.bgi {
+    position: relative;
+    margin: 4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bg {
+    width: 100%;
+    height: 180px;
+}
+
+.pfb {
+    position: relative;
+    z-index: 1;
+    bottom: 4rem;
+    left: 4rem;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    background-color: var(--pf-color);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    margin-bottom: 0;
+}
+
+.pfb h2 {
+    position: relative;
+    bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: var(--s-color);
+}
+
+.ab {
+    position: relative;
+    bottom: 60px;
+    margin: 3rem;
+    left: 5rem;
+    margin-bottom: 9rem;
+    line-height: 1rem;
+    color: var(--ab-color);
+}
+
+.name h1 {
+    font-family: "Monsieur La Doulaise", 'cursive';
+    font-style: normal;
+}
+
+.name {
+    line-height: 12px;
+}
+
+.ll {
+    margin-bottom: 0.5rem;
+
+}
+
+.link {
+    display: flex;
+    line-height: 1px;
+    gap: 9px;
+
+}
+
+.link a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+.gallery {
+    column-count: 4;
+    column-gap: 1rem;
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    margin: 5rem auto 2rem;
+    margin-right: 5rem;
+    pointer-events: none;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    background: var(--g-color);
+    color: var(--tg-color);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    user-select: none;
+}
+
+.gallery-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.caption {
+    padding: 1rem;
+    height: 50px auto;
+    width: 100% auto;
+}
+
+.caption p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 10px;
+    color: var(--footer-color);
+}
+
+@media (max-width: 1000px) {
+    .gallery {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .gallery {
+        column-count: 1;
+        margin: 1rem;
+        padding: 1.1rem;
+
+    }
+
+    header {
+        top: 8px;
+        padding: 1rem;
+
+
+    }
+
+    .bgi {
+        margin: 1rem;
+    }
+
+    .ab {
+        left: 0;
+        font-size: small;
+    }
+
+    .pfb {
+        width: 90px;
+        height: 90px;
+        bottom: 50px;
+        left: 2rem;
+    }
+
+    canvas {
+        width: 100%;
+        height: 120px;
+
+    }
+
+    .dn {
+        right: auto;
+    }
+
+    .pfb h2 {
+        font-size: 50px;
+    }
+}
