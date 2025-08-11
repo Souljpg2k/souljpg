@@ -1,5 +1,4 @@
 const galleryData = [
-    { description: "蛾", img: "img/182568.png" },
     { description: "失蹤的孩子", img: "img/CSJPG.jpg" },
     { description: "深夜廚房", img: "img/Girl with glasses.jpg" },
     { description: "狐女", img: "img/red.png" },
