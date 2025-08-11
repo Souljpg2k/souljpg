@@ -13,7 +13,7 @@ galleryData.forEach(item => {
     const card = document.createElement('div');
     card.className = 'gallery-item';
     card.innerHTML = `
-        <img src="${item.img}" alt="${item.title}" />
+        <img src="${item.img}" alt="${item.description}" />
         <div class="caption">
           <p>${item.description}</p>
         </div>
