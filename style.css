@@ -7,13 +7,11 @@ html {
 }
 
 :root {
-    --bgb-color: #ffffff;
-    --logo-color: #222;
+    --bgb-color: #fff;
     --ab-color: #222;
     --link-color: #222;
     --footer-color: #222;
-    --pf-color: #000000;
-    --s-color: #fff;
+    --s-color: #ffffff;
     --g-color: #ffffff;
     --tg-color: #222;
 }
@@ -21,41 +19,32 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: "DM Sans", sans-serif;
+    font-family: "Google Sans Code", monospace;
+    font-optical-sizing: auto;
+    background-color: var(--bgb-color);
     overflow-x: hidden;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 30px;
-    width: auto;
-    margin: 0;
-    padding: 0.4rem;
-    padding-left: 4rem;
-    background-color: var(--bgb-color);
-}
-
-.logo h1 {
-    user-select: none;
-    font-size: 18px;
-    color: var(--logo-color);
-}
-
-.bgi {
+.box {
     position: relative;
     margin: 4rem;
-    margin-top: 0;
+    margin-top: 1rem;
     margin-bottom: 1rem;
-    pointer-events: none;
     user-select: none;
+    pointer-events: none;
+
 }
 
 .bg {
     width: 100%;
     height: 180px;
     overflow: hidden;
+}
+
+.bg img {
+    width: 100%;
+    height: auto;
+    position: relative;
 }
 
 .pfb {
@@ -65,22 +54,13 @@ header {
     left: 4rem;
     width: 120px;
     height: 120px;
-    object-fit: cover;
-    border: 4px solid #fff;
-    background-color: var(--pf-color);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
     margin-bottom: 0;
 }
 
-.pfb h2 {
-    position: relative;
-    bottom: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 60px;
-    color: var(--s-color);
+.pfb img {
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
 }
 
 .ab {
@@ -94,23 +74,15 @@ header {
 }
 
 .name h1 {
-    font-family: "Monsieur La Doulaise", 'cursive';
-    font-style: normal;
-}
-
-.name {
-    line-height: 12px;
-}
-
-.ll {
-    margin-bottom: 0.5rem;
-
+    font-family: "Great Vibes", cursive;
 }
 
 .link {
     display: flex;
-    line-height: 1px;
-    gap: 9px;
+    align-items: center;
+    position: relative;
+    bottom: 8px;
+    gap: 8px;
 
 }
 
@@ -131,7 +103,7 @@ header {
     padding: 0 1rem;
     margin: 5rem auto 2rem;
     margin-right: 5rem;
-    pointer-events: none;
+    cursor: pointer;
 }
 
 .gallery-item {
@@ -144,7 +116,7 @@ header {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    user-select: none;
+
 }
 
 .gallery-item.show {
@@ -169,10 +141,54 @@ header {
     font-size: 0.9rem;
 }
 
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+#lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#lightbox .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+#lightbox .close-btn:hover {
+    transform: scale(1.2);
+}
+
 footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     padding: 0.5rem;
     font-size: 10px;
     color: var(--footer-color);
@@ -209,24 +225,15 @@ footer {
         font-size: small;
     }
 
+    .bg {
+        width: 100%;
+        height: 8rem;
+    }
+
     .pfb {
         width: 90px;
         height: 90px;
-        bottom: 50px;
+        bottom: 60px;
         left: 2rem;
-    }
-
-    canvas {
-        width: 100%;
-        height: 120px;
-
-    }
-
-    .dn {
-        right: auto;
-    }
-
-    .pfb h2 {
-        font-size: 50px;
     }
 }
