@@ -13,17 +13,20 @@ const gallery = document.getElementById("gallery");
 if (!gallery) {
     console.error("error");
 } else {
-    const observer = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // ใส่ delay ไล่ตามลำดับ
+                setTimeout(() => {
                     entry.target.classList.add("show");
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.1 }
-    );
+                }, index * 150); // 150ms ต่อชิ้น
+
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+
 
     galleryData.forEach(item => {
         const card = document.createElement("div");
@@ -77,4 +80,21 @@ lightbox.addEventListener("click", e => {
     if (e.target === lightbox) {
         lightbox.classList.remove("active");
     }
+});
+
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+        backToTopBtn.classList.add("show");
+    } else {
+        backToTopBtn.classList.remove("show");
+    }
+});
+
+backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
