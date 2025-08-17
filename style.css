@@ -9,67 +9,45 @@ html {
 :root {
     --ab-color: #ffffff;
     --link-color: #ffffff;
-    --footer-color: #ffffff;
-    --s-color: #ffffff;
-    --g-color: #ffffff;
-    --tg-color: #222;
+    --footer-color: #373a3c;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: "Google Sans Code", monospace;
-    background-image: url(img/lab.jpg);
     font-optical-sizing: auto;
     overflow-x: hidden;
-}
-
-.box {
-    position: relative;
-    margin: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    user-select: none;
-    pointer-events: none;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    background-color: #000;
 
 }
 
-.bg {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-}
-
-.bg img {
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-
-.pfb {
-    position: relative;
-    z-index: 1;
-    bottom: 4rem;
-    left: 4rem;
-    width: 120px;
-    height: 120px;
-    margin-bottom: 0;
-}
-
-.pfb img {
-    object-fit: cover;
-    width: 120px;
-    height: 120px;
+section {
+    height: 100vh;
 }
 
 .ab {
     position: relative;
+    top: 9rem;
     bottom: 60px;
     margin: 3rem;
     left: 5rem;
     margin-bottom: 9rem;
     line-height: 1rem;
     color: var(--ab-color);
+}
+
+.bg {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100vh;
+}
+
+.bg img {
+    width: 100vh;
 }
 
 .name h1 {
@@ -94,11 +72,24 @@ body {
     text-decoration: underline;
 }
 
+.g1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 4px;
+}
+
+.g1 h1 {
+    color: #fff;
+}
+
 .gallery {
+    position: relative;
+    bottom: 4rem;
     column-count: 4;
     column-gap: 1rem;
     max-width: 100%;
-    margin: 2rem auto;
     padding: 0 1rem;
     margin: 5rem auto 2rem;
     margin-right: 5rem;
@@ -134,6 +125,7 @@ body {
     padding: 1rem;
     height: 50px auto;
     width: 100% auto;
+    background-color: #ffffff;
 }
 
 .caption p {
@@ -232,6 +224,7 @@ footer {
     padding: 0.5rem;
     font-size: 10px;
     color: var(--footer-color);
+    margin-top: 9rem;
 }
 
 @media (max-width: 1000px) {
@@ -244,20 +237,6 @@ footer {
 
     .gallery {
         column-count: 1;
-        margin: 1rem;
-        padding: 1.1rem;
-
-    }
-
-    header {
-        top: 8px;
-        padding: 1rem;
-
-
-    }
-
-    .bgi {
-        margin: 1rem;
     }
 
     .ab {
@@ -274,7 +253,6 @@ footer {
         width: 90px;
         height: 90px;
         bottom: 60px;
-        left: 2rem;
     }
 
     .link {
@@ -284,4 +262,6 @@ footer {
     .caption p {
         font-size: smaller;
     }
+
+
 }

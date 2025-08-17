@@ -1,12 +1,16 @@
 const galleryData = [
-    { description: "Info-CS", img: "img/CSJPG.jpg" },
-    { description: "Dream", img: "img/dream.jpg" },
-    { description: "Lab-257c", img: "img/lab.jpg" },
-    { description: "精神", img: "img/1462568.jpg" },
-    { description: "White Demon", img: "img/2572568.jpg" },
-    { description: "Night", img: "img/blue!.JPG" },
+    { description: "情報-CS", img: "img/CSJPG.jpg" },
+    { description: "夢ただの夢", img: "img/dream.jpg" },
+    { description: "ラボ-257c", img: "img/lab.jpg" },
+    { description: "霊", img: "img/1462568.jpg" },
+    { description: "白い悪魔", img: "img/2572568.jpg" },
+    { description: "ナイト", img: "img/blue!.JPG" },
     { description: "Rkgk", img: "img/xcxcxvsdsesse.jpg" },
     { description: "Rkgk", img: "img/182568.jpg" },
+    { description: "キーボード", img: "img/keyboard.jpg" },
+    { description: "ナース", img: "img/nurse.png" },
+    { description: "パーフェクトブルー", img: "img/perfect blue.jpg" },
+
 ];
 
 const gallery = document.getElementById("gallery");
@@ -96,3 +100,37 @@ backToTopBtn.addEventListener("click", () => {
         behavior: "smooth"
     });
 });
+
+const sections = document.querySelectorAll('section');
+let isScrolling = false;
+
+function snapToSection(direction) {
+    const currentSection = Math.round(window.scrollY / window.innerHeight);
+    let targetSection = currentSection + direction;
+
+
+    targetSection = Math.max(0, Math.min(targetSection, sections.length - 1));
+
+    sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+
+
+    const checkScroll = () => {
+        const scrollY = window.scrollY;
+        const targetY = sections[targetSection].offsetTop;
+        if (Math.abs(scrollY - targetY) < 2) {
+            isScrolling = false;
+        } else {
+            requestAnimationFrame(checkScroll);
+        }
+    };
+    requestAnimationFrame(checkScroll);
+}
+
+
+window.addEventListener('wheel', (e) => {
+    if (isScrolling) return;
+    isScrolling = true;
+    const direction = e.deltaY > 0 ? 1 : -1;
+    snapToSection(direction);
+});
+
