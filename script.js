@@ -16,11 +16,9 @@ if (!gallery) {
     const observer = new IntersectionObserver(entries => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // ใส่ delay ไล่ตามลำดับ
                 setTimeout(() => {
                     entry.target.classList.add("show");
-                }, index * 150); // 150ms ต่อชิ้น
-
+                }, index * 150);
                 observer.unobserve(entry.target);
             }
         });
