@@ -1,34 +1,31 @@
 const galleryData = [
-    { description: "情報-CS", img: "img/CSJPG.jpg" },
-    { description: "夢ただの夢", img: "img/dream.jpg" },
-    { description: "ラボ-257c", img: "img/lab.jpg" },
-    { description: "霊", img: "img/1462568.jpg" },
-    { description: "白い悪魔", img: "img/2572568.jpg" },
-    { description: "ナイト", img: "img/blue!.JPG" },
-    { description: "Rkgk", img: "img/xcxcxvsdsesse.jpg" },
-    { description: "Rkgk", img: "img/182568.jpg" },
-    { description: "キーボード", img: "img/keyboard.jpg" },
-    { description: "ナース", img: "img/nurse.png" },
-    { description: "パーフェクトブルー", img: "img/perfect blue.jpg" },
+    { img: "img/CSJPG.jpg" },
+    { img: "img/dream.jpg" },
+    { img: "img/lab.jpg" },
+    { img: "img/1462568.jpg" },
+    { img: "img/2572568.jpg" },
+    { img: "img/blue!.JPG" },
+    { img: "img/xcxcxvsdsesse.jpg" },
+    { img: "img/182568.jpg" },
+    { img: "img/keyboard.jpg" },
+    { img: "img/nurse.png" },
+    { img: "img/perfect blue.jpg" },
 
 ];
 
 const gallery = document.getElementById("gallery");
 if (!gallery) {
-    console.error("error");
+    console.error("error: gallery not found");
 } else {
     const observer = new IntersectionObserver(entries => {
-        entries.forEach((entry, index) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add("show");
-                }, index * 150);
-                observer.unobserve(entry.target);
+                entry.target.classList.add("show");
+            } else {
+                entry.target.classList.remove("show");
             }
         });
     }, { threshold: 0.1 });
-
-
 
     galleryData.forEach(item => {
         const card = document.createElement("div");
@@ -36,17 +33,9 @@ if (!gallery) {
 
         const img = document.createElement("img");
         img.src = item.img;
-        img.alt = item.description;
+        img.alt = "";
 
-        const caption = document.createElement("div");
-        caption.className = "caption";
-
-        const p = document.createElement("p");
-        p.textContent = item.description;
-
-        caption.appendChild(p);
-        card.append(img, caption);
-
+        card.appendChild(img);
         gallery.appendChild(card);
         observer.observe(card);
     });
@@ -55,13 +44,11 @@ if (!gallery) {
 const lightbox = document.createElement("div");
 lightbox.id = "lightbox";
 lightbox.innerHTML = `
-  <span class="close-btn">&times;</span>
   <img class="lightbox-img" src="" alt="" />
 `;
 document.body.appendChild(lightbox);
 
 const lightboxImg = lightbox.querySelector(".lightbox-img");
-const closeBtn = lightbox.querySelector(".close-btn");
 
 
 document.addEventListener("click", e => {
@@ -70,11 +57,6 @@ document.addEventListener("click", e => {
         lightboxImg.alt = e.target.alt;
         lightbox.classList.add("active");
     }
-});
-
-
-closeBtn.addEventListener("click", () => {
-    lightbox.classList.remove("active");
 });
 
 
@@ -104,15 +86,14 @@ backToTopBtn.addEventListener("click", () => {
 const sections = document.querySelectorAll('section');
 let isScrolling = false;
 
+
 function snapToSection(direction) {
     const currentSection = Math.round(window.scrollY / window.innerHeight);
     let targetSection = currentSection + direction;
-
-
     targetSection = Math.max(0, Math.min(targetSection, sections.length - 1));
 
-    sections[targetSection].scrollIntoView({ behavior: 'smooth' });
-
+    isScrolling = true;
+    sections[targetSection].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     const checkScroll = () => {
         const scrollY = window.scrollY;
@@ -127,10 +108,45 @@ function snapToSection(direction) {
 }
 
 
-window.addEventListener('wheel', (e) => {
+function scrollToTarget(targetId) {
+    if (targetId === '#home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        const target = document.querySelector(targetId);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        scrollToTarget(targetId);
+    });
+});
+
+
+window.addEventListener('wheel', e => {
     if (isScrolling) return;
-    isScrolling = true;
     const direction = e.deltaY > 0 ? 1 : -1;
     snapToSection(direction);
 });
+
+
+let startY = 0;
+window.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchend', e => {
+    const endY = e.changedTouches[0].clientY;
+    const diff = startY - endY;
+
+    if (Math.abs(diff) > 50) {
+        const direction = diff > 0 ? 1 : -1;
+        if (!isScrolling) snapToSection(direction);
+    }
+}, { passive: true });
+
 
